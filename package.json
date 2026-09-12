@@ -1,0 +1,26 @@
+{
+  "name": "assertion-creator",
+  "version": "0.1.0",
+  "description": "Generate structural Postman and Axios assertions from JSON API responses",
+  "type": "module",
+  "author": "Sandeep Kumar Aitha",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "api-testing",
+    "assertions",
+    "axios",
+    "json",
+    "postman"
+  ],
+  "bin": {
+    "assertion-creator": "src/cli.js"
+  },
+  "scripts": {
+    "generate": "node src/cli.js",
+    "start": "node src/server.js",
+    "test": "node --test"
+  }
+}

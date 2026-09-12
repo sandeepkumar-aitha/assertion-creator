@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assertion Creator</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <output class="toast" id="toast" aria-live="polite" aria-atomic="true">
+      <span class="toast-icon" aria-hidden="true">&#10003;</span>
+      <span id="toast-message">Assertions generated successfully.</span>
+    </output>
+    <div class="page-grid" aria-hidden="true"></div>
+    <main class="shell">
+      <header class="masthead">
+        <a class="brand" href="/" aria-label="Assertion Creator home">
+          <span class="brand-mark">AC</span>
+          <span>Assertion Creator</span>
+        </a>
+        <span class="eyebrow">API test composer</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="kicker">Response to assertion</p>
+        <h1 id="page-title">Turn any JSON shape into a test script.</h1>
+        <p class="intro-copy">Paste a response, set its HTTP status, and generate structural Postman assertions in one pass.</p>
+      </section>
+
+      <section class="workspace" aria-label="Assertion generator">
+        <form class="panel input-panel" id="generator-form">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-index" id="input-index">01 / 04 Input</p>
+              <h2>Response payload</h2>
+            </div>
+            <span class="format-tag">JSON</span>
+          </div>
+
+          <label class="field-label" for="response-input">Response body</label>
+          <textarea id="response-input" name="response" spellcheck="false" placeholder="Paste your JSON response here..." required></textarea>
+
+          <div class="status-row">
+            <label class="field-label" for="status-input">HTTP status</label>
+            <input id="status-input" name="status" type="number" min="100" max="599" value="200" required />
+          </div>
+
+          <div class="target-row">
+            <label class="field-label" for="target-input">Assertion target</label>
+            <select id="target-input" name="target">
+              <option value="postman">Postman</option>
+              <option value="axios">Axios · expect</option>
+            </select>
+          </div>
+
+          <div class="input-actions">
+            <button class="secondary-button" id="fetch-structure" type="button">
+              <span>Fetch structure</span>
+              <span class="button-arrow" aria-hidden="true">&#8595;</span>
+            </button>
+            <button class="primary-button" id="generate-button" type="submit" disabled>
+              <span>Generate assertions</span>
+              <span class="button-arrow" aria-hidden="true">&#8594;</span>
+            </button>
+          </div>
+          <output class="form-message" id="form-message" aria-live="polite"></output>
+        </form>
+
+        <section class="panel output-panel" aria-labelledby="output-title">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-index" id="output-index">04 / 04 Output</p>
+              <h2 id="output-title">Postman script</h2>
+            </div>
+            <button class="copy-button" id="copy-button" type="button" disabled>Copy</button>
+          </div>
+          <pre class="code-output" id="code-output"><code>Generated assertions will appear here.</code></pre>
+          <div class="output-meta">
+            <span id="output-state">Waiting for response</span>
+            <span id="output-count">0 lines</span>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel schema-panel" id="schema-panel" aria-labelledby="schema-title" hidden>
+        <div class="panel-heading">
+          <div>
+            <p class="panel-index" id="schema-index">02 / 04 Structure</p>
+            <h2 id="schema-title">Review response structure</h2>
+          </div>
+          <div class="schema-tools">
+            <label class="schema-option" for="assert-data-types">
+              <input id="assert-data-types" type="checkbox" checked />
+              <span>Assert data types</span>
+            </label>
+            <span class="schema-summary" id="schema-summary">0 fields</span>
+          </div>
+        </div>
+        <p class="schema-intro" id="schema-intro">Adjust types, nullability, or optional value rules before generating the Postman script.</p>
+        <div class="schema-table-wrap">
+          <table class="schema-table">
+            <thead>
+              <tr>
+                <th scope="col">Path</th>
+                <th scope="col">Data type</th>
+                <th scope="col">Nullable</th>
+                <th scope="col">Value rule</th>
+              </tr>
+            </thead>
+            <tbody id="schema-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel extraction-panel" id="extraction-panel" aria-labelledby="extraction-title" hidden>
+        <div class="panel-heading">
+          <div>
+            <p class="panel-index" id="extraction-index">03 / 04 Variables</p>
+            <h2 id="extraction-title">Extract for later requests</h2>
+          </div>
+          <button class="secondary-button extraction-add-button" id="add-extraction" type="button">
+            <span>Add extraction</span>
+            <span class="button-arrow" aria-hidden="true">+</span>
+          </button>
+        </div>
+        <p class="schema-intro">Choose a response path, save its first, indexed, or all values, and reuse them in later Postman requests.</p>
+        <div class="extraction-list-wrap">
+          <div class="extraction-list" id="extraction-rows">
+            <p class="extraction-empty">No values selected for later requests.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer-note">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Schema-aware generation</span>
+        <span class="footer-divider">/</span>
+        <span>Null values remain optional</span>
+        <span class="footer-divider">/</span>
+        <span>Created by Sandeep Kumar Aitha</span>
+        <span class="footer-divider">/</span>
+        <span>AI-assisted with GPT 5.6 Luna</span>
+      </footer>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
